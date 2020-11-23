@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Configuration for the library master application.  Beans here define the heart of the application logic. -->
+	<!-- Book repository -->
+	<bean id="bookRepository"
+		  name="bookRepository"
+		  class="ite.librarymaster.repository.InMemoryBookRepository"
+		  init-method="initialize"
+	      destroy-method="destroy"/>
+
+	<!-- TODO: Try Autowiring -->
+	<bean id="libraryService"
+		  class="ite.librarymaster.service.LibraryServiceImpl">
+		<!-- Constructor DI example -->
+	    <!-- <constructor-arg ref="bookRepository"/>-->
+
+		<!-- Inline Bean definition example-->
+		<!--<constructor-arg>
+			<bean class="ite.librarymaster.repository.InMemoryBookrRepository" init-method="initialize"/>
+		</constructor-arg>-->
+
+        <!-- Constructor DI example with positional arguments -->
+       	<!--<constructor-arg index="0" ref="bookRepository"/>-->
+
+		<!-- Setter DI example -->
+		<property name="bookRepository" ref="bookRepository"/>
+	</bean>
+
+</beans>
